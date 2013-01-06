@@ -1,0 +1,24 @@
+{
+    "name": "nicmart/functionals",
+    "type": "library",
+    "description": "Functionals is a collection of functionals for PHP",
+    "keywords": ["php", "functionals", "closures"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolò Martini",
+            "email": "nicmartnic@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+
+    },
+    "autoload": {
+        "psr-0": {
+            "Functionals": "src/",
+            "Functionals\\Test": "tests"
+        }
+    }
+}
+
