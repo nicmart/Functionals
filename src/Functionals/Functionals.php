@@ -202,6 +202,6 @@ class Functionals
     private static function validate($function)
     {
         if (!is_callable($function))
-            throw new \InvalidArgumentException('All functions managed by Functional must be callable objects');
+            throw new \InvalidArgumentException('All functions managed by Functionals must be callable objects');
     }
 }
