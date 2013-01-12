@@ -85,7 +85,7 @@ In Functionals you can obtain a partial function application with the method `Fu
 $sum = function($a, $b) { return $a + $b; };
 $next = Functionals::partial($sum, array(1));
 
-$next(2); // 3
+$next(2);  // 3
 $next(10); // 11
 ```
 
@@ -96,8 +96,38 @@ $if = function($condition, $ifTrue, $ifFalse) { return $condition ? $ifTrue : $i
 
 $boolDump = Functionals::partial($if, array( 1 => 'TRUE!', 2 => 'FALSE!'))
 
-$bool(true); // TRUE!
+$bool(true);  // TRUE!
 $next(false); // FALSE!
+```
+
+### Currying
+
+To get a [curried version](http://en.wikipedia.org/wiki/Currying) of a function in several variable, use
+the `Functionals::curry` method:
+
+```php
+$sum = function($a, $b, $c) { return $a + $b + $c; };
+$a = Functionals::curry($sum);
+$b = $a(1);
+$c = $b(2);
+
+$c(10);  // 13
+$c(101); // 104
+```
+
+### Combine
+
+Given a set of functions `f, g, h, ...` that act on the same domain,
+a combined version of that functions is the function
+
+    x → array(f(x), g(x), h(x), ...)
+
+In functionals you can easily combine functions with `Functionals::combine`:
+
+```php
+$stringVersions = Functionals::combine('strtolower', 'strtoupper', 'ucfirst');
+
+$stringVersions('hElLo'); // array('hello', 'HELLO', 'HElLo')
 ```
 
 Tests
