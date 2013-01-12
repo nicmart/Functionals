@@ -170,28 +170,39 @@ You can convert a function that accept several arguments to a function that acce
  $sum2(array(2, 10)); // 12
  ```
 
-The inverse of the previous functional is `Functionals::array_to_args()`. This can be useful
-in conjunction with composition, since the functions in a composition chain that are
-not in the last position can recieve only one argument:
+ This functional can be useful
+ in conjunction with composition, since the functions in a composition chain that are
+ not in the last position can recieve only one argument:
 
-```php
-$sum = function() { return array_sum(func_get_args()); };
-$numbersUntil = function($n) {
-    $numbers = array();
-    for ($i = 0; $i <= $n; $i++)
-        $numbers[] = $i;
-    return $numbers;
-};
+ ```php
+ $sum = function() { return array_sum(func_get_args()); };
+ $numbersUntil = function($n) {
+     $numbers = array();
+     for ($i = 0; $i <= $n; $i++)
+         $numbers[] = $i;
+     return $numbers;
+ };
 
-$sumUntil = Functionals::compose(
-    Functionals::args_to_array($sum),
-    $numbersUntil
-);
+ $sumUntil = Functionals::compose(
+     Functionals::args_to_array($sum),
+     $numbersUntil
+ );
 
-$sumUntil(1); // 1
-$sumUntil(5); // 15
-$sumUntil(100); // 5050 (=100 + 101 / 2)
-```
+ $sumUntil(1); // 1
+ $sumUntil(5); // 15
+ $sumUntil(100); // 5050 (=100 + 101 / 2)
+ ```
+
+The inverse of the previous functional is `Functionals::array_to_args()`:
+
+ ```php
+ $sum = function(array $numbers) { return array_sum($numbers); };
+
+ $sum2 = Functionals::array_to_args($sum);
+
+ $sum2(1, 2, 3); //6
+ $sum2(10, 20, 3); //33
+ ```
 
 Tests
 -----
