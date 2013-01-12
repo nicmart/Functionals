@@ -100,7 +100,7 @@ $bool(true);  // TRUE!
 $next(false); // FALSE!
 ```
 
-### Currying
+### Currying and uncurrying
 
 To get a [curried version](http://en.wikipedia.org/wiki/Currying) of a function in several variable, use
 the `Functionals::curry` method:
@@ -115,19 +115,82 @@ $c(10);  // 13
 $c(101); // 104
 ```
 
-### Combine
+You can also uncurry a function. This time you have to specify the numer of the original function arguments:
+
+```php
+$uncurried = Functionals::uncurry($a, 3);
+
+$uncurried(5, 7, 11);    //23
+```
+
+### Combine and uncombine
 
 Given a set of functions `f, g, h, ...` that act on the same domain,
 a combined version of that functions is the function
 
     x → array(f(x), g(x), h(x), ...)
 
-In functionals you can easily combine functions with `Functionals::combine`:
+In Functionals you can easily combine callables with `Functionals::combine`:
 
 ```php
 $stringVersions = Functionals::combine('strtolower', 'strtoupper', 'ucfirst');
 
 $stringVersions('hElLo'); // array('hello', 'HELLO', 'HElLo')
+```
+
+Conversely, you can uncombine a function that returns array values. In this case you have to
+specify the number of items in the array values:
+
+```php
+$ops = function($a, $b) { return array($a + $b, $a * $b, $a - $b); };
+
+list($sum, $multiplication, $difference) = Functionals::uncombine($ops, 3);
+
+$sum(10, 5);            // 15
+$multiplication(10, 5); // 50
+$difference(10, 5);     // 5
+```
+
+### Args to array and array to args
+
+You can convert a function that accept several arguments to a function that accept a single array
+ argument through the functional `Functionals::args_to_array()`.
+
+ For example, if you have the function in two variables `f(x, y)` with this functional you obtain
+ the function (in pseudo-code)
+
+     Functionals::args_to_array(f) : array(x, y) → f(x, y)
+
+ In php:
+
+ ```php
+ $sum = function($a, $b) { return $a + $b; };
+ $sum2 = Functionals::args_to_array($sum);
+
+ $sum2(array(2, 10)); // 12
+ ```
+
+The inverse of the previous functional is `Functionals::array_to_args()`. This can be useful
+in conjunction with composition, since the functions in a composition chain that are
+not in the last position can recieve only one argument:
+
+```php
+$sum = function() { return array_sum(func_get_args()); };
+$numbersUntil = function($n) {
+    $numbers = array();
+    for ($i = 0; $i <= $n; $i++)
+        $numbers[] = $i;
+    return $numbers;
+};
+
+$sumUntil = Functionals::compose(
+    Functionals::args_to_array($sum),
+    $numbersUntil
+);
+
+$sumUntil(1); // 1
+$sumUntil(5); // 15
+$sumUntil(100); // 5050 (=100 + 101 / 2)
 ```
 
 Tests
