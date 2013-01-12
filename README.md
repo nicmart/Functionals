@@ -204,6 +204,14 @@ The inverse of the previous functional is `Functionals::array_to_args()`:
  $sum2(10, 20, 3); //33
  ```
 
+TODO
+-----
+
+* Some security checks on inputs and array sizes
+* Performance considerations
+* Give more useful/amusing examples?
+* Automatically detect end of chain for uncurrying
+
 Tests
 -----
 
