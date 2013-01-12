@@ -102,7 +102,7 @@ $next(false); // FALSE!
 
 ### Currying and uncurrying
 
-To get a [curried version](http://en.wikipedia.org/wiki/Currying) of a function in several variable, use
+To get a [curried version](http://en.wikipedia.org/wiki/Currying) of a function in several variables, use
 the `Functionals::curry` method:
 
 ```php
