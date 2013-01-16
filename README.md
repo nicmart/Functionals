@@ -96,8 +96,8 @@ $if = function($condition, $ifTrue, $ifFalse) { return $condition ? $ifTrue : $i
 
 $boolDump = Functionals::partial($if, array( 1 => 'TRUE!', 2 => 'FALSE!'))
 
-$bool(true);  // TRUE!
-$next(false); // FALSE!
+$boolDump(true);  // TRUE!
+$boolDump(false); // FALSE!
 ```
 
 ### Currying and uncurrying
