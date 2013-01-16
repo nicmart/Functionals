@@ -115,7 +115,7 @@ $c(10);  // 13
 $c(101); // 104
 ```
 
-You can also uncurry a function. This time you have to specify the numer of the original function arguments:
+You can also uncurry a function. This time you have to specify the number of the original function arguments:
 
 ```php
 $uncurried = Functionals::uncurry($a, 3);
