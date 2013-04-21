@@ -32,6 +32,19 @@ class FunctionalsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(8, $composition(-5, 1));
     }
 
+    public function testPipe()
+    {
+        $add = function ($a, $b) { return $a + $b; };
+        $opposite = function($n) { return -$n; };
+        $double = function($n) { return 2 * $n; };
+
+        $piped = Functionals::pipe($add, $double, $opposite);
+
+        $this->assertEquals(-10, $piped(2, 3));
+        $this->assertEquals(-30, $piped(5, 10));
+        $this->assertEquals(8, $piped(-5, 1));
+    }
+
     public function testComposeWithOneArgument()
     {
         $add = function ($a, $b) { return $a + $b; };

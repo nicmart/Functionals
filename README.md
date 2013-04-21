@@ -1,8 +1,6 @@
-# Functionals
+# Functionals [![Build Status](https://secure.travis-ci.org/nicmart/Functionals.png?branch=master)](http://travis-ci.org/nicmart/Functionals)
 
 Functionals is a simple library that provides a set of functionals written in php.
-
-[![Build Status](https://secure.travis-ci.org/nicmart/Functionals.png?branch=master)](http://travis-ci.org/nicmart/Functionals)
 
 ## What do you mean with "functionals"?
 
@@ -70,6 +68,18 @@ $beautifyString = Functionals::compose(
 
 echo $beautifyString('   i\'m a reAlly Bad writTen STRING');
 //prints "I'm a really good written string"
+```
+
+### Piping
+Piping is like composition, but arguments are given in the reverse order, like in a UNIX pipeline.
+```php
+$sum = function($a, $b) { return $a + $b; };
+$half = function($n) { return $n/2; };
+
+$middle = Functionals::compose($sum, $half);
+
+echo $middle(10, 16); //Prints 13
+echo $middle(-10, 10); //Prints 0
 ```
 
 ### Partial

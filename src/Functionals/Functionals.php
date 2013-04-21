@@ -155,6 +155,19 @@ class Functionals
     }
 
     /**
+     * Piping of functions. It's like a composition, but with reversed arguments order
+     *
+     * @param callable $function The leftmost function of the composition chain
+     * @param callable $function,... An unlimited list of callables to compose
+     *
+     * @return callable
+     */
+    public static function pipe(/* $function1, $function2, ... */)
+    {
+        return call_user_func_array(array(get_class(), 'compose'), array_reverse(func_get_args()));
+    }
+
+    /**
      * Get a curried version of the function (@link http://en.wikipedia.org/wiki/Currying)
      * If $argsArgument is null, it tries to find the number of arguments through reflection. This of course
      * does not give the expected results when the function use undeclared arguments through func_get_args()
