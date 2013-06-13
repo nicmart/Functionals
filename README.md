@@ -104,7 +104,7 @@ Piping is like composition, but arguments are given in the reverse order, like i
 $sum = function($a, $b) { return $a + $b; };
 $half = function($n) { return $n/2; };
 
-$middle = Functionals::compose($sum, $half);
+$middle = Functionals::pipe($sum, $half);
 
 echo $middle(10, 16); //Prints 13
 echo $middle(-10, 10); //Prints 0
