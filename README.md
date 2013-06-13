@@ -41,7 +41,7 @@ use Functionals\Functionals;
 ### Diagonalization!
 
 It happens that you have a set indexed by two integers, and you want to completely traverse it using only
-one index (do you remember the proof of countability of [rational numbers](http://en.wikipedia.org/wiki/Rational_number)?
+one index (do you remember the proof of countability of [rational numbers](http://en.wikipedia.org/wiki/Rational_number)?)
 Then this function can help you, giving a complete enumeration of the set. This is done using the inverse of the
 [Cantor's pairing function](http://en.wikipedia.org/wiki/Pairing_function).
 
