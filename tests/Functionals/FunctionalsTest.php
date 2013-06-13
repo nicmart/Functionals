@@ -156,4 +156,23 @@ class FunctionalsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($add(11,21,3), $add2(11,21,3));
         $this->assertEquals($add(80,3,40), $add2(80,3,40));
     }
+
+    public function testDiagonalize()
+    {
+        $f = function($x, $y) { return [$x, $y]; };
+
+        $g = Functionals::diagonalize($f);
+
+        $this->assertEquals([0, 0] , $g(0));
+        $this->assertEquals([1, 0] , $g(1));
+        $this->assertEquals([0, 1] , $g(2));
+        $this->assertEquals([2, 0] , $g(3));
+        $this->assertEquals([1, 1] , $g(4));
+        $this->assertEquals([0, 2] , $g(5));
+        $this->assertEquals([3, 0] , $g(6));
+        $this->assertEquals([2, 1] , $g(7));
+        $this->assertEquals([1, 2] , $g(8));
+        $this->assertEquals([0, 3] , $g(9));
+
+    }
 }

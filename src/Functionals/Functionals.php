@@ -212,6 +212,33 @@ class Functionals
         };
     }
 
+    /**
+     * Diagonalize a function in two integer variables into a function of one variable using the inverse of the
+     * Cantor's pairing function (@link http://en.wikipedia.org/wiki/Pairing_function).
+     * (The function that was used to prove that rationals are countable!)
+     * Useful if you want to traverse a set indicized by more than one variable.
+     *
+     * This assures that there is a bijection between $f image and diagonalize($f) image.
+     *
+     * @param callable $f
+     *
+     * @return callable
+     */
+    public static function diagonalize($f)
+    {
+        /**
+         * @param int $n
+         */
+        return function($n) use ($f) {
+            $w = (int) ((sqrt(8*$n + 1)-1)/2);
+
+            $y = $n - (pow($w,2) + $w)/2;
+            $x = $w - $y;
+
+            return $f($x, $y);
+        };
+    }
+
     private static function validate($function)
     {
         if (!is_callable($function))

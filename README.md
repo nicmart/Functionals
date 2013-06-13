@@ -37,6 +37,34 @@ require 'vendor/autoload.php';
 use Functionals\Functionals;
 ```
 
+## What's new (2013-06-13)
+### Diagonalization!
+
+It happens that you have a set indexed by two integers, and you want to completely traverse it using only
+one index (do you remember the proof of countability of [rational numbers](http://en.wikipedia.org/wiki/Rational_number)?
+Then this function can help you, giving a complete enumeration of the set. This is done using the inverse of the
+[Cantor's pairing function](http://en.wikipedia.org/wiki/Pairing_function).
+
+More formally, you have a function
+`f : N x N → A`,
+where `N` is the set of natural numbers, and A is another set. What you get is a function
+`g : N → A`,
+such that for each natural numbers `l` and `m` there exists an unique `n` such that
+`f (l, m) = g(n)`
+and the range of `f` is the same of the range of `g`.
+
+ Example:
+```php
+$couples = function($x, $y) { return [$x, $y]; };
+$diagonalized = Functionals::diagonalize($couples);
+$diagonalized(0);  // [0, 0]
+$diagonalized(1);  // [1, 0]
+$diagonalized(2);  // [0, 1]
+$diagonalized(3);  // [2, 0]
+...
+```
+
+
 ## Usage
 
 ### Composition of functions
@@ -213,6 +241,9 @@ The inverse of the previous functional is `Functionals::array_to_args()`:
  $sum2(1, 2, 3); //6
  $sum2(10, 20, 3); //33
  ```
+
+### Diagonalization
+See the What's new section.
 
 TODO
 -----
