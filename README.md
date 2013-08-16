@@ -1,4 +1,4 @@
-# Functionals [![Build Status](https://secure.travis-ci.org/nicmart/Functionals.png?branch=master)](http://travis-ci.org/nicmart/Functionals)
+# Functionals [![Build Status](https://secure.travis-ci.org/nicmart/Functionals.png?branch=master)](http://travis-ci.org/nicmart/Functionals) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/nicmart/Functionals/badges/quality-score.png?s=04fb2774123b7330612094412ccaf5b06f03b59e)](https://scrutinizer-ci.com/g/nicmart/Functionals/)
 
 Functionals is a simple library that provides a set of functionals written in php.
 
