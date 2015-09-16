@@ -137,21 +137,7 @@ class Functionals
     {
         $functions = func_get_args();
 
-        if (count($functions) === 1) {
-            static::validate($functions[0]);
-            return $functions[0];
-        }
-
-        $firstFunction = array_shift($functions);
-
-        static::validate($firstFunction);
-
-        return function() use($firstFunction, $functions) {
-
-            $partial = call_user_func_array(array('\Functionals\Functionals', 'compose'), $functions);
-
-            return call_user_func($firstFunction, call_user_func_array($partial, func_get_args()));
-        };
+        return call_user_func_array(array("Functionals\\Functionals", "pipe"), array_reverse($functions));
     }
 
     /**
@@ -164,7 +150,18 @@ class Functionals
      */
     public static function pipe(/* $function1, $function2, ... */)
     {
-        return call_user_func_array(array(get_class(), 'compose'), array_reverse(func_get_args()));
+        $functions = func_get_args();
+
+        return function () use ($functions) {
+            $val = func_get_args();
+            foreach ($functions as $i =>$function) {
+                $val = $i == 0
+                    ? call_user_func_array($function, $val)
+                    : $function($val)
+                ;
+            }
+            return $val;
+        };
     }
 
     /**

@@ -12,12 +12,11 @@
     ],
     "require": {
         "php": ">=5.4.1"
-
     },
     "autoload": {
-        "psr-0": {
-            "Functionals": "src/",
-            "Functionals\\Test": "tests"
+        "psr-4": {
+            "Functionals\\": "src/",
+            "Functionals\\Test\\": "tests/"
         }
     }
 }
